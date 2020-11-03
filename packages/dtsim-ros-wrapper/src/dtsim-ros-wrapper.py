@@ -16,6 +16,19 @@ class MyPublisherNode(DTROS):
         self.pub = rospy.Publisher('chatter', String, queue_size=10)
 
     def run(self):
+        # Initialize the simulator 
+        env = Simulator(
+            seed=123, # random seed
+            map_name="loop_empty",
+            max_steps=500001, # we don't want the gym to reset itself
+            domain_rand=0,
+            camera_width=640,
+            camera_height=480,
+            accept_start_angle_deg=4, # start close to straight
+            full_transparency=True,
+            distortion=True,
+        )  
+
         # publish message every 1 second
         rate = rospy.Rate(1) # 1Hz
         while not rospy.is_shutdown():
@@ -36,21 +49,6 @@ class MySubscriberNode(DTROS):
         rospy.loginfo("I heard %s", data.data)
 
 if __name__ == '__main__':
-
-    # Initialize the simulator 
-    env = Simulator(
-        seed=123, # random seed
-        map_name="loop_empty",
-        max_steps=500001, # we don't want the gym to reset itself
-        domain_rand=0,
-        camera_width=640,
-        camera_height=480,
-        accept_start_angle_deg=4, # start close to straight
-        full_transparency=True,
-        distortion=True,
-    )  
-
-
 
     # create the node
     node = MyPublisherNode(node_name='my_publisher_node')
