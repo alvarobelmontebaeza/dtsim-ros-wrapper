@@ -1,7 +1,7 @@
 # parameters
-ARG REPO_NAME="<REPO_NAME_HERE>"
-ARG DESCRIPTION="<DESCRIPTION_HERE>"
-ARG MAINTAINER="<YOUR_FULL_NAME> (<YOUR_EMAIL_ADDRESS>)"
+ARG REPO_NAME="dtsim-ros-wrapper"
+ARG DESCRIPTION="Duckietown compliant ROS package that serves as interface between Duckiebot ROS nodes and the Duckietown simulator "
+ARG MAINTAINER="Alvaro Belmonte Baeza (alvaro.bb.7@gmail.com)"
 # pick an icon from: https://fontawesome.com/v4.7.0/icons/
 ARG ICON="cube"
 
