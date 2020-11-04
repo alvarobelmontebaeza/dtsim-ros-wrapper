@@ -27,7 +27,7 @@ class ROSWrapper(DTROS):
 
         # construct rendered observation publisher
         self.camera_pub = rospy.Publisher(
-            '/'+ VEHICLE_NAME + '/camera_node/image_compressed',
+            '/'+ VEHICLE_NAME + '/camera_node/image/compressed',
             CompressedImage,
             queue_size=1
         )
@@ -84,7 +84,7 @@ class ROSWrapper(DTROS):
 
         '''
         # publish message every 1 second
-        rate = rospy.Rate(1) # 1Hz
+        # rate = rospy.Rate(1) # 1Hz
 
         while not rospy.is_shutdown():
             
@@ -100,13 +100,15 @@ class ROSWrapper(DTROS):
                 self.env.reset()
 
             # Transalte the observation into a CompressedImage message to publish it
-            img_msg = CvBridge.cv2_to_compressed_imgmsg(observation)
+            bgr_obs = cv2.cvtColor(observation,cv2.COLOR_RGB2BGR)
+            bridge = CvBridge()
+            img_msg = bridge.cv2_to_compressed_imgmsg(cvim=bgr_obs,dst_format="jpg")
 
             # Publish the image in the /image/compressed topic
             self.camera_pub.publish(img_msg)
 
             # Give time to process everything
-            rate.sleep()
+            # rate.sleep()
 
 
 if __name__ == '__main__':

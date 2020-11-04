@@ -13,8 +13,8 @@ dt-launchfile-init
 # NOTE: Use `dt-exec COMMAND` to run the main process (blocking process)
 
 # launching app
-dt-exec Xvfb :1 -screen 0 1024x768x24 -ac +extension GLX +render -noreset
-export DISPLAY=:1
+dt-exec Xvfb :33 -screen 0 1024x768x24 -ac +extension GLX +render -noreset
+export DISPLAY=:33
 
 dt-exec rosrun dtsim-ros-wrapper dtsim-ros-wrapper.py
 # ----------------------------------------------------------------------------
