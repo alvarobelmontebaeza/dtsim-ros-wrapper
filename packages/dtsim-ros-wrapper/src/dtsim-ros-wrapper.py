@@ -83,8 +83,6 @@ class ROSWrapper(DTROS):
             into actions executed in the simulator. The process iterates until the node is terminated
 
         '''
-        # publish message every 1 second
-        # rate = rospy.Rate(1) # 1Hz
 
         while not rospy.is_shutdown():
             
@@ -106,9 +104,6 @@ class ROSWrapper(DTROS):
 
             # Publish the image in the /image/compressed topic
             self.camera_pub.publish(img_msg)
-
-            # Give time to process everything
-            # rate.sleep()
 
 
 if __name__ == '__main__':
