@@ -27,14 +27,14 @@ class ROSWrapper(DTROS):
 
         # construct rendered observation publisher
         self.camera_pub = rospy.Publisher(
-            '/'+ VEHICLE_NAME + '/camera_node/image/compressed',
+            '~/'+ VEHICLE_NAME + '/camera_node/image/compressed',
             CompressedImage,
             queue_size=1
         )
 
         # Construct subscriber for wheel_cmd topic
         self.wheels_cmd_sub = rospy.Subscriber(
-            '/'+ VEHICLE_NAME + '/wheels_driver_node/wheels_cmd',
+            '~/'+ VEHICLE_NAME + '/wheels_driver_node/wheels_cmd',
             WheelsCmdStamped,
             self.wheels_cmd_cb,
             queue_size=1
@@ -92,6 +92,9 @@ class ROSWrapper(DTROS):
             observation, reward, done, misc = self.env.step(self.action)
             # Render the new state
             self.env.render()
+
+            # Set again action to stop, in case no more messages are being received
+            self.action = [0.0,0.0]
 
             if done:
                 # Reset the simulator when the robot goes out of the road.
