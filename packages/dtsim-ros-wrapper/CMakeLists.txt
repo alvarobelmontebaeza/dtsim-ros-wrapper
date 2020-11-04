@@ -3,6 +3,8 @@ project(dtsim-ros-wrapper)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
+  duckietown_msgs
+  sensor_msgs
 )
 
 catkin_package()
